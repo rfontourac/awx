@@ -1,0 +1,7 @@
+- name: Install selected software
+  hosts: "{{ target_hosts }}"
+  tasks:
+    - name: Install the package
+      win_chocolatey:
+        name: "{{ selected_software }}"
+        state: present
