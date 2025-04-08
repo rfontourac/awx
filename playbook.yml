@@ -1,7 +1,19 @@
-- name: Install selected software
-  hosts: "{{ target_hosts }}"
+- name: Instalar software no dispositivo selecionado
+  hosts: "{{ computadores_selecionados }}"
   tasks:
+    - name: Mostrar Variavel
+      debug:
+        var: softwares_selecionados
+    
     - name: Install the package
       win_chocolatey:
-        name: "{{ selected_software }}"
+        name: "{{ softwares_selecionados }}"
         state: present
+        source: "{{ repositorio_cliente }}, {{ repositorio_geral }}"
+        source_username: "{{ usuario_ldap }}"
+        source_password: "{{ senha_ldap }}" 
+        
+
+    vars:
+      ansible_user: "{{ usuario_ldap }}"
+      ansible_password: "{{ senha_ldap }}"
